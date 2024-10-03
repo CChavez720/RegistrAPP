@@ -8,12 +8,16 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'splash-register',
     pathMatch: 'full'
   },
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'splash-register',
+    loadChildren: () => import('./splash-register/splash-register.module').then( m => m.SplashRegisterPageModule)
   },
 ];
 
