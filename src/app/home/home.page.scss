@@ -1,8 +1,16 @@
 ion-toolbar {
-  --background: #92ccf9; /* Color celeste */
-  background-color: #92ccf9;
+  --background: #92ccf9;
+  width: 100%;
+  height: 80px;
+  --padding-top: 0px;
+  --padding-bottom: 0px;
+  display: flex;
+  align-items: center;
 }
 
+.white-icon {
+  color: white !important; 
+}
 .user-info {
   display: flex;
   align-items: center;
