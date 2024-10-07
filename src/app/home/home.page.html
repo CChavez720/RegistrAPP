@@ -28,19 +28,20 @@
         </ion-button>
       </ion-menu-toggle>
     </ion-buttons>
-    <ion-title>Inicio</ion-title>
+    <ion-title class="title-inicio">Inicio</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content id="main-content">
-  <div class="user-info">
-    <img [src]="userImage" alt="User Image" class="user-image" />
-    <div class="user-text">
-      <p>Bienvenido/a</p>
-      <p>{{ userName }}</p>
+  <div class="div-user">
+    <div class="user-info">
+      <img [src]="userImage" alt="User Image" class="user-image" />
+      <div class="user-text">
+        <p>Bienvenido/a</p>
+        <p>{{ userName }}</p>
+      </div>
     </div>
   </div>
-
   <div class="icon-grid">
     <ion-row>
       <ion-col size="6">
