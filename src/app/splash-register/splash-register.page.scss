@@ -1,43 +1,44 @@
 .splash-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Asegúrate de usar 100vh para ocupar toda la altura de la ventana */
-    background-color: #fff; /* Cambia el color de fondo si es necesario */
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Asegúrate de usar 100vh para ocupar toda la altura de la ventana */
+  background-color: #f2f2f2; /* Actualizado el color de fondo */
+}
+
 .logo-container img {
-width: 150px; /* Ajusta el tamaño según sea necesario */
-height: 150px; /* Ajusta el tamaño según sea necesario */
-animation: fadeIn 2s ease-in-out;
+  width: 150px; /* Ajusta el tamaño según sea necesario */
+  height: 150px; /* Ajusta el tamaño según sea necesario */
+  animation: fadeIn 2s ease-in-out;
 }
 
 @keyframes fadeIn {
-0% {
+  0% {
     opacity: 0;
     transform: scale(0.5);
-}
-100% {
+  }
+  100% {
     opacity: 1;
     transform: scale(1);
+  }
 }
-}
+
 ion-content {
---padding-start: 0;
---padding-end: 0;
---padding-top: 0;
---padding-bottom: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
 }
 
 .logo-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%; /* Asegura que ocupe el 100% del contenedor */
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%; /* Asegura que ocupe el 100% del contenedor */
+}
+
 .logo-container img {
-width: 150px; /* Ajusta según sea necesario */
-height: 150px; /* Ajusta según sea necesario */
+  width: 150px; /* Ajusta según sea necesario */
+  height: 150px; /* Ajusta según sea necesario */
 }

@@ -15,10 +15,10 @@ ion-toolbar {
 }
 
 .white-icon {
-  color: white !important; 
+  color: white !important;
 }
 
-.div-user{
+.div-user {
   background-image: url('/assets/images/backgroundUser.png'); /* Ruta de la imagen */
   background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el área */
   background-position: center; /* Centra la imagen */
@@ -49,15 +49,57 @@ ion-toolbar {
   text-align: center;
 }
 
+/* Estilos personalizados para los botones */
+.custom-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e6f0fa; /* Color de fondo para cada botón */
+  border-radius: 10px;
+  height: 150px; /* Ajuste de altura del botón (incrementado) */
+  width: 150px; /* Asegura que todos los botones sean cuadrados */
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombras suaves */
+  transition: background-color 0.3s ease;
+}
+
+.custom-button:hover {
+  background-color: #d4e4f8; /* Cambio de color al hacer hover */
+}
+
+.icon-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-container ion-icon {
+  color: #003366; /* Color de los íconos */
+  margin-bottom: 10px; /* Espacio entre ícono y texto */
+}
+
+.icon-container p {
+  font-size: 14px;
+  color: #003366; /* Color del texto */
+  margin: 0;
+}
+
+/* Ajustes adicionales para los iconos */
 ion-col {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100px;
+  height: 180px; /* Ajuste para acomodar mejor los botones */
 }
 
 ion-icon {
   color: #3880ff;
   margin-bottom: 10px;
+}
+
+/* Fondo general de la página */
+ion-content {
+  --background: #f2f2f2; /* Color de fondo para todo el contenido */
 }
