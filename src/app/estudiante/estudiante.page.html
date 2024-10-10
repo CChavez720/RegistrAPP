@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Bienvenido, Juan Perez</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Logo centrado -->
+  <div class="logo-container">
+    <img src="assets/images/logoRegister.png" alt="Logo de la página" class="logo" />
+  </div>
+
+  <!-- Botones centrados -->
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <div class="card-button" (click)="verAsistencia()">
+          <ion-icon name="checkmark-done-outline" class="icono"></ion-icon>
+          <p>Asistencia</p>
+        </div>
+      </ion-col>
+      <ion-col size="6">
+        <div class="card-button" (click)="escanearQR()">
+          <ion-icon name="qr-code-outline" class="icono"></ion-icon>
+          <p>Escanear QR</p>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<!-- Footer -->
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>2024 RegistrApp - Todos los derechos reservados</ion-title>
+  </ion-toolbar>
+</ion-footer>

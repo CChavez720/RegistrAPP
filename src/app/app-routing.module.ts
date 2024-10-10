@@ -18,7 +18,11 @@ const routes: Routes = [
   {
     path: 'splash-register',
     loadChildren: () => import('./splash-register/splash-register.module').then( m => m.SplashRegisterPageModule)
+  },  {
+    path: 'estudiante',
+    loadChildren: () => import('./estudiante/estudiante.module').then( m => m.EstudiantePageModule)
   },
+
 ];
 
 @NgModule({
