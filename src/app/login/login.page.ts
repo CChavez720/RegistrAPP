@@ -1,21 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FirebaseService } from '../services/firebase.service';
+import { User } from 'src/models/user.model';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss']
 })
-export class LoginPage {
+export class LoginPage implements OnInit{
+  
+  form = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators. required])
+  })
 
-  constructor(private router: Router) {}
+  firebaseSvc = inject(FirebaseService);
 
-  onLogin() {
-    // Aquí puedes manejar la lógica de autenticación
-    console.log("Login button clicked!");
+  ngOnInit(){    
+  }
 
-    // Simula el inicio de sesión exitoso y redirige al usuario
-    this.router.navigate(['/dashboard']); // O a la ruta que desees redirigir
+  submit(){
+    if(this.form.valid){
+      this.firebaseSvc.signIn(this.form.value as User).then(res =>{
+        console.log(res);
+      })
+    }
   }
 }
 
