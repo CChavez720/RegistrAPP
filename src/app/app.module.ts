@@ -19,7 +19,7 @@ import { environment } from '../environments/environment';
     BrowserModule, 
     IonicModule.forRoot(), 
     AppRoutingModule, 
-    ReactiveFormsModule,  // Asegúrate de que esto esté aquí
+    ReactiveFormsModule,  
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule
   ],
