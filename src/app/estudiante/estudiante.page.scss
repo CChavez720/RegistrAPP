@@ -94,3 +94,21 @@ ion-footer ion-title {
     font-size: 13px;
 
 }
+
+.logout-container {
+    position: absolute;
+    top: 10px; /* Ajusta según la distancia desde la parte superior que prefieras */
+    right: 10px; /* Ajusta según la distancia desde la parte derecha */
+    z-index: 100; /* Asegura que el botón se muestre por encima de otros elementos */
+}
+  
+.btn-logout {
+    background-color: #92ccf9;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+  

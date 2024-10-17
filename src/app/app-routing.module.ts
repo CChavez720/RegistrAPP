@@ -23,7 +23,8 @@ const routes: Routes = [
   },
   {
     path: 'estudiante',
-    loadChildren: () => import('./estudiante/estudiante.module').then( m => m.EstudiantePageModule)
+    loadChildren: () => import('./estudiante/estudiante.module').then( m => m.EstudiantePageModule),
+    canActivate: [AuthGuard] // Protege la ruta de estudiante
   },
 ];
 

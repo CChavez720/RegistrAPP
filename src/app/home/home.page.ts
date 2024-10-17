@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router'; // Importa el Router para redirigir al login
+import { FirebaseService } from '../services/firebase.service'; // Importa el servicio de Firebase
 
 @Component({
   selector: 'app-home',
@@ -10,8 +12,16 @@ export class HomePage {
   userName: string = 'Juan Pérez';  // Nombre de usuario
   userImage: string = 'assets/img/user.png';  // Ruta de la imagen del usuario
 
-  constructor() {
-    // El constructor está vacío porque no necesitas inicializar nada especial aquí
+  // Inyecta el servicio de Firebase y el Router
+  constructor(private firebaseSvc: FirebaseService, private router: Router) {}
+
+  // Método para cerrar sesión
+  logout() {
+    this.firebaseSvc.auth.signOut().then(() => {
+      // Redirige al login después de cerrar sesión
+      this.router.navigate(['/login']);
+    }).catch(error => {
+      console.error('Error al cerrar sesión:', error);
+    });
   }
 }
-
