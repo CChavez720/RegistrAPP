@@ -5,7 +5,7 @@ import { AuthGuard } from './guards/auth.guard'; // Importa el guard que has cre
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule),
     canActivate: [AuthGuard] // Protege la ruta con el guard de autenticación
   },
   {
@@ -15,17 +15,18 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
   },
   {
     path: 'splash-register',
-    loadChildren: () => import('./splash-register/splash-register.module').then( m => m.SplashRegisterPageModule)
+    loadChildren: () => import('./splash-register/splash-register.module').then(m => m.SplashRegisterPageModule)
   },
   {
     path: 'estudiante',
-    loadChildren: () => import('./estudiante/estudiante.module').then( m => m.EstudiantePageModule),
+    loadChildren: () => import('./estudiante/estudiante.module').then(m => m.EstudiantePageModule),
     canActivate: [AuthGuard] // Protege la ruta de estudiante
-  },
+  }
+  // No es necesario tener la ruta de asistencia aquí, ya que ahora está dentro de 'home'.
 ];
 
 @NgModule({

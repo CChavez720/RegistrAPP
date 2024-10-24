@@ -1,0 +1,72 @@
+/* Estilos para el toolbar (barra superior) */
+.custom-toolbar {
+    background-color: #6ec5f2;
+  }
+  
+  .center-title {
+    text-align: center;
+  }
+  
+  /* Tarjeta principal con borde redondeado y sombra */
+  .custom-card {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin: 16px;
+    padding: 10px;
+    background-color: white;
+  }
+  
+  /* Título y subtítulo de la tarjeta */
+  .card-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #333; /* Texto oscuro */
+  }
+  
+  .card-subtitle {
+    font-size: 1.2rem;
+    color: #2196F3; /* Azul para la sección */
+  }
+  
+  /* Información sobre el lugar y semestre */
+  .content-info {
+    margin-top: 10px;
+  }
+  
+  .content-text {
+    color: #333;
+    font-size: 0.95rem;
+  }
+  
+  .icon-grey {
+    color: #777;
+  }
+  
+  /* Recuadro azul oscuro para el horario */
+  .course-info-box {
+    background-color: #0a3055;
+    border-radius: 8px;
+    padding: 8px;
+    margin-top: 10px;
+  }
+  
+  .course-info {
+    --background: none;
+  }
+  
+  .course-text {
+    color: white;
+    font-size: 1rem;
+  }
+  
+  .icon-white {
+    color: white;
+  }
+  
+  /* Botón de generar QR */
+  .qr-button {
+    background-color: #4bb8f0;
+    border-radius: 6px;
+    margin-top: 10px;
+  }
+  

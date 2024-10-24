@@ -13,6 +13,8 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { environment } from '../environments/environment';
 
+import { QRCodeModule } from 'angularx-qrcode';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -21,7 +23,8 @@ import { environment } from '../environments/environment';
     AppRoutingModule, 
     ReactiveFormsModule,  
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    QRCodeModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
