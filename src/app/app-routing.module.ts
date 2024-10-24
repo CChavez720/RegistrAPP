@@ -25,6 +25,11 @@ const routes: Routes = [
     path: 'estudiante',
     loadChildren: () => import('./estudiante/estudiante.module').then(m => m.EstudiantePageModule),
     canActivate: [AuthGuard] // Protege la ruta de estudiante
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminPageModule),
+    canActivate: [AuthGuard] // Protege la ruta de admin si es necesario
   }
   // No es necesario tener la ruta de asistencia aquí, ya que ahora está dentro de 'home'.
 ];
