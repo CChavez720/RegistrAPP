@@ -11,9 +11,14 @@ export class FirebaseService {
   auth = inject(AngularFireAuth);
   firestore = inject(AngularFirestore);
 
-  // Usar AngularFireAuth directamente para iniciar sesión
+  // Método para iniciar sesión
   signIn(user: User) {
     return this.auth.signInWithEmailAndPassword(user.email, user.password);
+  }
+
+  // Método para cerrar sesión
+  signOut() {
+    return this.auth.signOut();
   }
 
 }

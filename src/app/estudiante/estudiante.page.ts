@@ -8,27 +8,22 @@ import { FirebaseService } from '../services/firebase.service'; // Importa el se
   styleUrls: ['./estudiante.page.scss'],
 })
 export class EstudiantePage {
-  nombreUsuario: string; // Propiedad para el nombre del usuario
+  nombreUsuario: string;
 
-  constructor(private router: Router, private firebaseSvc: FirebaseService) { // Inyecta FirebaseService
-    // Aquí puedes obtener el nombre del usuario de una API, servicio, o localStorage
-    this.nombreUsuario = 'Juan Perez'; 
+  constructor(private router: Router, private firebaseSvc: FirebaseService) {
+    this.nombreUsuario = 'Juan Perez';
   }
 
   verAsistencia() {
-    // Redirigir a la página de asistencia
     this.router.navigate(['/asistencia']);
   }
 
   escanearQR() {
-    // Redirigir a la página de escaneo de QR
     this.router.navigate(['/escanear-qr']);
   }
 
-  // Método para cerrar sesión
   logout() {
     this.firebaseSvc.auth.signOut().then(() => {
-      // Redirige al login después de cerrar sesión
       this.router.navigate(['/login']);
     }).catch(error => {
       console.error('Error al cerrar sesión:', error);
