@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router'; // Importa el Router para redirigir al login
+import { Router } from '@angular/router'; // Importa el Router para redirigir
 import { FirebaseService } from '../services/firebase.service'; // Importa el servicio de Firebase
 
 @Component({
@@ -23,5 +23,10 @@ export class HomePage {
     }).catch(error => {
       console.error('Error al cerrar sesión:', error);
     });
+  }
+
+  // Método para redirigir a la página de asistencia
+  navigateToAsistencia() {
+    this.router.navigate(['/home/asistencia']);  // Redirige a la página de asistencia
   }
 }

@@ -1,23 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
-import { HomePage } from './home.page';  // Asegúrate de importar HomePage correctamente
+import { AsistenciaPage } from './asistencia.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: HomePage,
-    children: [
-      {
-        path: 'asistencia',
-        loadChildren: () => import('./asistencia/asistencia.module').then(m => m.AsistenciaPageModule)
-      },
-      {
-        path: '',
-        redirectTo: '/home',
-        pathMatch: 'full'
-      }
-    ]
+    component: AsistenciaPage
   }
 ];
 
@@ -25,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class HomePageRoutingModule {}
+export class AsistenciaPageRoutingModule {}
