@@ -30,8 +30,15 @@ const routes: Routes = [
     path: 'admin',
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminPageModule),
     canActivate: [AuthGuard] // Protege la ruta de admin si es necesario
+  },
+  {
+    path: 'materias',
+    loadChildren: () => import('./materias/materias.module').then( m => m.MateriasPageModule)
+  },
+  {
+    path: 'asistencia',
+    loadChildren: () => import('./asistencia/asistencia.module').then( m => m.AsistenciaPageModule)
   }
-  // No es necesario tener la ruta de asistencia aquí, ya que ahora está dentro de 'home'.
 ];
 
 @NgModule({

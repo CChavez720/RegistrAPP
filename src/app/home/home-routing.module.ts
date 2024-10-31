@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomePage } from './home.page';
+import { AuthGuard } from '../guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -9,13 +10,8 @@ const routes: Routes = [
     children: [
       {
         path: 'asistencia',
-        loadChildren: () => import('./asistencia/asistencia.module').then(m => m.AsistenciaPageModule)
-      },
-      // Se elimina la redirección automática para evitar conflictos
-      {
-        path: '',
-        redirectTo: '',  // Puedes dejar vacío si no necesitas redirigir automáticamente
-        pathMatch: 'full'
+        loadChildren: () => import('../asistencia/asistencia.module').then(m => m.AsistenciaPageModule),
+        canActivate: [AuthGuard]
       }
     ]
   }

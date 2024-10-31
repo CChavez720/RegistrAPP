@@ -1,28 +1,3 @@
-<ion-menu side="start" menuId="first" contentId="main-content">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>Menú</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content>
-    <ion-list>
-      <ion-item>
-        <ion-label>Opción 1</ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>Opción 2</ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>Opción 3</ion-label>
-      </ion-item>
-      <ion-item button (click)="logout()">
-        <ion-icon slot="start" name="log-out-outline"></ion-icon>
-        <ion-label>Cerrar Sesión</ion-label>
-      </ion-item>
-    </ion-list>
-  </ion-content>
-</ion-menu>
-
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -36,7 +11,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content id="main-content">
+<ion-content>
   <div class="div-user">
     <div class="user-info">
       <img [src]="userImage" alt="User Image" class="user-image" />
@@ -49,7 +24,7 @@
   <div class="icon-grid">
     <ion-row>
       <ion-col size="6">
-        <ion-button class="custom-button" expand="block" fill="clear">
+        <ion-button class="custom-button" expand="block" fill="clear" (click)="navigateToMaterias()">
           <div class="icon-container">
             <ion-icon name="book-outline" size="large"></ion-icon>
             <p>Materias</p>
@@ -57,7 +32,7 @@
         </ion-button>
       </ion-col>
       <ion-col size="6">
-        <ion-button class="custom-button" expand="block" fill="clear">
+        <ion-button class="custom-button" expand="block" fill="clear" (click)="navigateToGrupos()">
           <div class="icon-container">
             <ion-icon name="people-outline" size="large"></ion-icon>
             <p>Grupos</p>
@@ -67,7 +42,7 @@
     </ion-row>
     <ion-row>
       <ion-col size="6">
-        <ion-button class="custom-button" expand="block" fill="clear">
+        <ion-button class="custom-button" expand="block" fill="clear" (click)="navigateToHorarios()">
           <div class="icon-container">
             <ion-icon name="calendar-outline" size="large"></ion-icon>
             <p>Horarios</p>
@@ -75,7 +50,7 @@
         </ion-button>
       </ion-col>
       <ion-col size="6">
-        <ion-button class="custom-button" expand="block" fill="clear">
+        <ion-button class="custom-button" expand="block" fill="clear" (click)="navigateToAlumnos()">
           <div class="icon-container">
             <ion-icon name="person-outline" size="large"></ion-icon>
             <p>Alumnos</p>
@@ -85,7 +60,6 @@
     </ion-row>
     <ion-row>
       <ion-col size="6">
-        <!-- Botón para navegar a la página de asistencia -->
         <ion-button class="custom-button" expand="block" fill="clear" (click)="navigateToAsistencia()">
           <div class="icon-container">
             <ion-icon name="checkmark-done-outline" size="large"></ion-icon>
@@ -94,7 +68,7 @@
         </ion-button>
       </ion-col>
       <ion-col size="6">
-        <ion-button class="custom-button" expand="block" fill="clear">
+        <ion-button class="custom-button" expand="block" fill="clear" (click)="navigateToReporte()">
           <div class="icon-container">
             <ion-icon name="document-text-outline" size="large"></ion-icon>
             <p>Reporte</p>
