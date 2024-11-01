@@ -31,9 +31,10 @@ export class LoginPage implements OnInit {
         const { email, password } = this.form.value;
         const userCredential = await this.authService.login(email, password);
   
-        if (userCredential) {
-          console.log('Inicio de sesión exitoso:', userCredential);
-          this.router.navigate(['/home']); // Redirige a la página de inicio
+        if (userCredential.role === 'profesor') {
+          this.router.navigate(['/home']); // Redirige a la página de inicio para profesores
+        }else if (userCredential.role === 'alumno') {
+          this.router.navigate(['/estudiante']); // Redirige a la vista de estudiantes
         }
       } catch (error) {
         console.error('Error al iniciar sesión:', error);
