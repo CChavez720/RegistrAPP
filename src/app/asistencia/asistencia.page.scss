@@ -1,13 +1,39 @@
-/* Estilos para el toolbar (barra superior) */
-.custom-toolbar {
+/* ==============================
+   Estilos para el toolbar (barra superior)
+   ============================== */
+   .custom-toolbar {
     background-color: #6ec5f2;
   }
   
-  .center-title {
+  ion-toolbar {
+    --background: #92ccf9;
+    width: 100%;
+    height: 80px;
+    --padding-top: 0px;
+    --padding-bottom: 0px;
+    display: flex;
+    align-items: center;
+  }
+
+/* ==============================
+   Estilos para el título
+   ============================== */
+   .centered-title {
     text-align: center;
+    padding-right: 25%;
+    color: white; /* Color del texto del título */
   }
   
-  /* Tarjeta principal con borde redondeado y sombra */
+  /* ==============================
+     Estilos para el botón de retroceso
+     ============================== */
+  .home-back-button {
+    color: white; /* Color del icono de flecha */
+  }
+  
+  /* ==============================
+     Estilos para la tarjeta principal
+     ============================== */
   .custom-card {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
@@ -16,7 +42,9 @@
     background-color: white;
   }
   
-  /* Título y subtítulo de la tarjeta */
+  /* ==============================
+     Estilos para el título y subtítulo de la tarjeta
+     ============================== */
   .card-title {
     font-size: 1.4rem;
     font-weight: bold;
@@ -28,7 +56,9 @@
     color: #2196F3; /* Azul para la sección */
   }
   
-  /* Información sobre el lugar y semestre */
+  /* ==============================
+     Estilos para la información del curso
+     ============================== */
   .content-info {
     margin-top: 10px;
   }
@@ -42,7 +72,9 @@
     color: #777;
   }
   
-  /* Recuadro azul oscuro para el horario */
+  /* ==============================
+     Estilos para la caja de información del horario
+     ============================== */
   .course-info-box {
     background-color: #0a3055;
     border-radius: 8px;
@@ -63,10 +95,35 @@
     color: white;
   }
   
-  /* Botón de generar QR */
+  /* ==============================
+   Estilos para el contenedor del código QR
+   ============================== */
+.qr-container-wrapper {
+  display: flex;               /* Utiliza flexbox para centrar */
+  justify-content: center;     /* Centra horizontalmente */
+  margin-top: 10px;           /* Espacio superior */
+}
+
+.qr-container {
+  width: 200px;               /* Ajusta el tamaño según sea necesario */
+  height: 200px;              /* Ajusta el tamaño según sea necesario */
+}
+
+  /* ==============================
+     Estilos para el botón de generar QR
+     ============================== */
   .qr-button {
     background-color: #4bb8f0;
     border-radius: 6px;
     margin-top: 10px;
+  }
+  
+  /* ==============================
+     Estilos adicionales para el título de asistencia
+     ============================== */
+  .inicio-asistencia {
+    color: #ffffff;
+    text-align: center;
+    padding-right: 20%;
   }
   

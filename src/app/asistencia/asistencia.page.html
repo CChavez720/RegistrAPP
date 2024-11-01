@@ -1,9 +1,10 @@
 <ion-header>
   <ion-toolbar class="custom-toolbar">
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <!-- Botón de retroceso con ícono de flecha -->
+      <ion-back-button defaultHref="/home" text="" icon="arrow-back-outline" class="home-back-button"></ion-back-button>
     </ion-buttons>
-    <ion-title class="center-title">Inicio</ion-title>
+    <ion-title class="centered-title">Asistencia</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -37,7 +38,9 @@
       <ion-button expand="block" class="qr-button" (click)="generateQRCode()">Generar QR</ion-button>
 
       <!-- Donde se mostrará el QR generado -->
-      <canvas id="qrcode" class="qr-container"></canvas>
+      <div class="qr-container-wrapper">
+        <canvas id="qrcode" class="qr-container"></canvas>
+      </div>
     </ion-card-content>
   </ion-card>
 </ion-content>

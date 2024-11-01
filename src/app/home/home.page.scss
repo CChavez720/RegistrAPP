@@ -1,3 +1,4 @@
+/* Estilos de la Toolbar */
 ion-toolbar {
   --background: #92ccf9;
   width: 100%;
@@ -8,27 +9,32 @@ ion-toolbar {
   align-items: center;
 }
 
+/* Estilo del título en la Toolbar */
 .title-inicio {
   color: #ffffff;
   text-align: center;
-  padding-right: 20%;
+  padding-left: 20%;
 }
 
+/* Estilo para los íconos blancos */
 .white-icon {
   color: white !important;
 }
 
+/* Estilos del contenedor de usuario */
 .div-user {
   background-image: url('/assets/images/backgroundUser.png'); /* Ruta de la imagen */
   background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el área */
   background-position: center; /* Centra la imagen */
 }
 
+/* Estilos del contenedor de información del usuario */
 .user-info {
   display: flex;
   align-items: center;
 }
 
+/* Estilo para la imagen de usuario */
 .user-image {
   margin-left: 30px;
   border-radius: 50%;
@@ -37,6 +43,7 @@ ion-toolbar {
   margin-right: 15px;
 }
 
+/* Estilos para el texto del usuario */
 .user-text {
   margin-left: 30px;
   font-size: 20px;
@@ -44,6 +51,7 @@ ion-toolbar {
   font-weight: bold;
 }
 
+/* Estilos para la cuadrícula de íconos */
 .icon-grid {
   margin-top: 20px;
   text-align: center;
@@ -56,7 +64,7 @@ ion-toolbar {
   align-items: center;
   background-color: #e6f0fa; /* Color de fondo para cada botón */
   border-radius: 10px;
-  height: 150px; /* Ajuste de altura del botón (incrementado) */
+  height: 150px; /* Ajuste de altura del botón */
   width: 150px; /* Asegura que todos los botones sean cuadrados */
   text-align: center;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombras suaves */
@@ -67,6 +75,7 @@ ion-toolbar {
   background-color: #d4e4f8; /* Cambio de color al hacer hover */
 }
 
+/* Estilos del contenedor de íconos */
 .icon-container {
   display: flex;
   flex-direction: column;
@@ -85,7 +94,7 @@ ion-toolbar {
   margin: 0;
 }
 
-/* Ajustes adicionales para los iconos */
+/* Ajustes para las columnas */
 ion-col {
   display: flex;
   flex-direction: column;
@@ -94,6 +103,7 @@ ion-col {
   height: 180px; /* Ajuste para acomodar mejor los botones */
 }
 
+/* Estilos generales para los íconos */
 ion-icon {
   color: #3880ff;
   margin-bottom: 10px;
@@ -102,4 +112,14 @@ ion-icon {
 /* Fondo general de la página */
 ion-content {
   --background: #f2f2f2; /* Color de fondo para todo el contenido */
+}
+
+/* Estilos para el botón de cerrar sesión */
+.logout-button {
+  margin-left: 10px; /* Espaciado a la izquierda del botón */
+}
+
+/* Asegúrate de que los iconos sean blancos */
+.white-icon {
+  color: white; /* Asegúrate de que los iconos sean blancos */
 }
