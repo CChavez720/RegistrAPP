@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { FirebaseService } from '../services/firebase.service'; // Importa el servicio de Firebase
+import { FirebaseService } from '../services/firebase.service';
 
 @Component({
   selector: 'app-admin',
@@ -14,9 +14,7 @@ export class AdminPage {
   // Método para cerrar sesión
   async logout() {
     try {
-      // Llamada a Firebase signOut
       await this.firebaseService.signOut();
-      // Redirigir a la página de login
       this.router.navigate(['/login']);
     } catch (error) {
       console.error('Error al cerrar sesión', error);

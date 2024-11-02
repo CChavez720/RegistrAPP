@@ -1,51 +1,39 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Panel de Administración</ion-title>
+    <ion-title class="custom-title">
+      Administración
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col size="12">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>Gestión de Estudiantes</ion-card-title>
-          </ion-card-header>
+<ion-content class="admin-content">
+  <!-- Bienvenida con imagen de fondo -->
+  <div class="welcome-container">
+    <div class="welcome-text">
+      <p>Bienvenido/a</p>
+      <p class="user-name">Nombre de Usuario</p>
+    </div>
+  </div>
+
+  <!-- Tarjetas de estudiantes y profesores -->
+  <ion-grid class="card-container">
+    <ion-row class="centered-row">
+      <ion-col size="auto">
+        <ion-card button (click)="navigateToStudents()" class="admin-card">
           <ion-card-content>
-            <ion-button expand="full" routerLink="/admin/students">
-              Ver Estudiantes
-            </ion-button>
+            <ion-icon name="people-circle-outline" class="icon"></ion-icon>
+            <p class="card-title">Estudiantes</p>
+            <p class="card-description">Administra y visualiza estudiantes</p>
           </ion-card-content>
         </ion-card>
       </ion-col>
-    </ion-row>
 
-    <ion-row>
-      <ion-col size="12">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>Gestión de Profesores</ion-card-title>
-          </ion-card-header>
+      <ion-col size="auto">
+        <ion-card button (click)="navigateToTeachers()" class="admin-card">
           <ion-card-content>
-            <ion-button expand="full" routerLink="/admin/teachers">
-              Ver Profesores
-            </ion-button>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col size="12">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>Otras Opciones</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <ion-button expand="full" (click)="logout()">
-              Cerrar Sesión
-            </ion-button>
+            <ion-icon name="school-outline" class="icon"></ion-icon>
+            <p class="card-title">Profesores</p>
+            <p class="card-description">Administra y visualiza profesores</p>
           </ion-card-content>
         </ion-card>
       </ion-col>

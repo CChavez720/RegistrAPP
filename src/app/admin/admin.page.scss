@@ -1,0 +1,81 @@
+ion-toolbar {
+    --background: #92ccf9;
+    --color: white; /* Color del texto en blanco */
+    text-align: center;
+  }
+  
+  .custom-title {
+    font-size: 1.2rem;
+    color: white; /* Asegúrate de que el texto sea blanco */
+    text-align: center;
+  }
+  
+  ion-content.admin-content {
+    --background: #f2f2f7;
+    position: relative;
+  }
+  
+  /* Estilos para el contenedor de bienvenida */
+  .welcome-container {
+    background: #4a90e2;
+    padding: 20px;
+    text-align: center;
+    color: #f2f2f2;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .welcome-text p {
+    margin: 0;
+    font-size: 1rem;
+  }
+  
+  .user-name {
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+  
+  /* Estilos para las tarjetas */
+  .card-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .centered-row {
+    justify-content: center;
+  }
+  
+  .admin-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120px;
+    width: 160px;
+    text-align: center;
+    background: #e3f2fd;
+    border-radius: 12px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+  }
+  
+  .icon {
+    font-size: 2.5rem;
+    color: #1e88e5;
+  }
+  
+  .card-title {
+    font-size: 1rem;
+    color: #1e88e5;
+    font-weight: bold;
+    margin-top: 8px;
+  }
+  
+  .card-description {
+    font-size: 0.8rem;
+    color: #555;
+    margin-top: 4px;
+  }
+  

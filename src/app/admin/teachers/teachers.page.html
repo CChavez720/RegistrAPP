@@ -1,13 +1,37 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>teachers</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="goBackToAdmin()">
+        <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Gestión de Profesores</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="addTeacher()">Agregar</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">teachers</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="6" size-lg="4" *ngFor="let teacher of teachers">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{ teacher.name }} {{ teacher.last_name }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p><strong>Correo:</strong> {{ teacher.email }}</p>
+            <p><strong>Cursos asignados:</strong> {{ teacher.assignedCourses?.join(', ') }}</p>
+            <ion-button expand="full" color="secondary" (click)="editTeacher(teacher)">
+              Editar
+            </ion-button>
+            <ion-button expand="full" color="danger" (click)="deleteTeacher(teacher)">
+              Eliminar
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

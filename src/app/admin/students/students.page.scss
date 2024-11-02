@@ -1,0 +1,20 @@
+ion-toolbar {
+    --background: #4a90e2;
+    --color: white;
+  }
+  
+  .students-content {
+    --background: #f2f2f7;
+  }
+  
+  ion-list {
+    margin-top: 10px;
+  }
+  
+  ion-item {
+    --background: #ffffff;
+    border-radius: 8px;
+    margin: 5px 10px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  

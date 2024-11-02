@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 // Firebase
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore'; // Agrega esto
 import { environment } from '../environments/environment';
 
 import { QRCodeModule } from 'angularx-qrcode';
@@ -24,6 +25,7 @@ import { QRCodeModule } from 'angularx-qrcode';
     ReactiveFormsModule,  
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
+    AngularFirestoreModule, 
     QRCodeModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
