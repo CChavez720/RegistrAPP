@@ -35,6 +35,8 @@ export class LoginPage implements OnInit {
           this.router.navigate(['/home']); // Redirige a la página de inicio para profesores
         }else if (userCredential.role === 'alumno') {
           this.router.navigate(['/estudiante']); // Redirige a la vista de estudiantes
+        }else if (userCredential.role === 'administrador') {
+          this.router.navigate(['/admin']); // Redirige a la vista de admin
         }
       } catch (error) {
         console.error('Error al iniciar sesión:', error);
