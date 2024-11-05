@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { StudentService } from '../../services/student.service';
+import { TeacherService } from '../../services/teacher.service';
 
 interface User {
+  id?: string;
   name: string;
   last_name: string;
   email: string;
   password: string;
-  role: 'alumno' | 'profesor';
+  role: 'profesor';
   assignedCourses: string[];
 }
 
@@ -21,7 +22,7 @@ export class TeachersPage implements OnInit {
   teachers: User[] = [];
 
   constructor(
-    private studentService: StudentService,
+    private teacherService: TeacherService,
     private alertController: AlertController,
     private router: Router
   ) {}
@@ -31,7 +32,7 @@ export class TeachersPage implements OnInit {
   }
 
   loadTeachers() {
-    this.studentService.getUsersByRole('profesor').subscribe(teachers => {
+    this.teacherService.getTeachers().subscribe(teachers => {
       this.teachers = teachers;
     });
   }
@@ -63,7 +64,7 @@ export class TeachersPage implements OnInit {
               role: 'profesor',
               assignedCourses: data.assignedCourses.split(',').map(id => id.trim())
             };
-            this.studentService.createUser(newTeacher).then(() => this.loadTeachers());
+            this.teacherService.createTeacher(newTeacher).then(() => this.loadTeachers());
           }
         }
       ]
@@ -85,7 +86,7 @@ export class TeachersPage implements OnInit {
         {
           text: 'Guardar',
           handler: data => {
-            this.studentService.updateUser(teacher.email, {
+            this.teacherService.updateTeacher(teacher.id!, {
               name: data.name,
               last_name: data.last_name,
               email: data.email,
@@ -107,7 +108,7 @@ export class TeachersPage implements OnInit {
         {
           text: 'Eliminar',
           handler: () => {
-            this.studentService.deleteUser(teacher.email).then(() => this.loadTeachers());
+            this.teacherService.deleteTeacher(teacher.id!).then(() => this.loadTeachers());
           }
         }
       ]

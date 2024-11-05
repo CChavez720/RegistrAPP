@@ -27,19 +27,25 @@ export class StudentService {
     return this.firestore.collection<User>('users', ref => ref.where('role', '==', role))
       .snapshotChanges()
       .pipe(
-        map(actions => actions.map(a => a.payload.doc.data() as User))
+        map(actions => actions.map(a => {
+          const data = a.payload.doc.data() as User;
+          const id = a.payload.doc.id;
+          return { ...data, id }; // Retornar el usuario junto con el ID
+        }))
       );
   }
 
   createUser(user: User): Promise<void> {
-    return this.usersCollection.doc(user.email).set(user);  // Usamos el email como ID
+    return this.usersCollection.add(user).then(docRef => {
+      console.log(`Usuario agregado con ID: ${docRef.id}`);
+    });
   }
 
-  updateUser(email: string, data: Partial<User>): Promise<void> {
-    return this.usersCollection.doc(email).update(data);
+  updateUser(id: string, data: Partial<User>): Promise<void> {
+    return this.usersCollection.doc(id).update(data);
   }
 
-  deleteUser(email: string): Promise<void> {
-    return this.usersCollection.doc(email).delete();
+  deleteUser(id: string): Promise<void> {
+    return this.usersCollection.doc(id).delete();
   }
 }
