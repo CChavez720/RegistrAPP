@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 
+//implEMENTAR QUE NO GUARDE EMAIL Y CONTRASEÑA
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
