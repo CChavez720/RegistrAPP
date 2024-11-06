@@ -3,49 +3,53 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/comp
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-// Definición del modelo User dentro del mismo archivo
-interface User {
+// Modelo para estudiantes
+interface Student {
+  id?: string; // ID generado automáticamente
   name: string;
   last_name: string;
   email: string;
   password: string;
-  role: 'alumno' | 'profesor';  // Solo los roles "alumno" y "profesor"
-  assignedCourses: string[];  // Array de IDs de ramos asignados
+  role: 'alumno'; // Solo el rol de "alumno" para este servicio
+  assignedCourses: string[];
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class StudentService {
-  private usersCollection: AngularFirestoreCollection<User>;
+  private studentsCollection: AngularFirestoreCollection<Student>;
 
   constructor(private firestore: AngularFirestore) {
-    this.usersCollection = this.firestore.collection<User>('users');
+    this.studentsCollection = this.firestore.collection<Student>('users', ref => ref.where('role', '==', 'alumno'));
   }
 
-  getUsersByRole(role: 'alumno' | 'profesor'): Observable<User[]> {
-    return this.firestore.collection<User>('users', ref => ref.where('role', '==', role))
-      .snapshotChanges()
-      .pipe(
-        map(actions => actions.map(a => {
-          const data = a.payload.doc.data() as User;
-          const id = a.payload.doc.id;
-          return { ...data, id }; // Retornar el usuario junto con el ID
-        }))
-      );
+  getStudents(): Observable<Student[]> {
+    return this.studentsCollection.snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Student;
+        const id = a.payload.doc.id;
+        return { ...data, id }; // Retornar el estudiante junto con el ID
+      }))
+    );
   }
 
-  createUser(user: User): Promise<void> {
-    return this.usersCollection.add(user).then(docRef => {
-      console.log(`Usuario agregado con ID: ${docRef.id}`);
+  createStudent(student: Student): Promise<void> {
+    return this.studentsCollection.add(student).then(docRef => {
+      console.log(`Estudiante agregado con ID: ${docRef.id}`);
     });
   }
 
-  updateUser(id: string, data: Partial<User>): Promise<void> {
-    return this.usersCollection.doc(id).update(data);
+  updateStudent(id: string, data: Partial<Student>): Promise<void> {
+    return this.studentsCollection.doc(id).update(data);
   }
 
-  deleteUser(id: string): Promise<void> {
-    return this.usersCollection.doc(id).delete();
+  deleteStudent(id: string): Promise<void> {
+    return this.studentsCollection.doc(id).delete().then(() => {
+      console.log(`Estudiante con ID ${id} eliminado correctamente.`);
+    }).catch(error => {
+      console.error("Error al eliminar el estudiante:", error);
+      throw error;
+    });
   }
 }

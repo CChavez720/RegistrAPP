@@ -3,7 +3,7 @@ import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { TeacherService } from '../../services/teacher.service';
 
-interface User {
+interface Teacher {
   id?: string;
   name: string;
   last_name: string;
@@ -19,7 +19,7 @@ interface User {
   styleUrls: ['./teachers.page.scss'],
 })
 export class TeachersPage implements OnInit {
-  teachers: User[] = [];
+  teachers: Teacher[] = [];
 
   constructor(
     private teacherService: TeacherService,
@@ -56,7 +56,7 @@ export class TeachersPage implements OnInit {
         {
           text: 'Agregar',
           handler: data => {
-            const newTeacher: User = {
+            const newTeacher: Teacher = {
               name: data.name,
               last_name: data.last_name,
               email: data.email,
@@ -72,7 +72,7 @@ export class TeachersPage implements OnInit {
     await alert.present();
   }
 
-  async editTeacher(teacher: User) {
+  async editTeacher(teacher: Teacher) {
     const alert = await this.alertController.create({
       header: 'Editar Profesor',
       inputs: [
@@ -99,7 +99,7 @@ export class TeachersPage implements OnInit {
     await alert.present();
   }
 
-  async deleteTeacher(teacher: User) {
+  async deleteTeacher(teacher: Teacher) {
     const alert = await this.alertController.create({
       header: 'Eliminar Profesor',
       message: `¿Estás seguro de eliminar a ${teacher.name} ${teacher.last_name}?`,

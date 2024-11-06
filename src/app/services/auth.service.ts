@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 export class AuthService {
   private currentUser: any = null; // Guarda los datos del usuario autenticado
 
-  constructor(private firestore: AngularFirestore) {}
+  constructor(private firestore: AngularFirestore, private afAuth: AngularFireAuth) {}
 
   // Iniciar sesión manualmente con Firestore
   async login(email: string, password: string) {
@@ -42,5 +43,9 @@ export class AuthService {
   // Cerrar sesión
   logout() {
     this.currentUser = null; // Limpia los datos del usuario al cerrar sesión
+  }
+
+  async sendPasswordResetEmail(email: string): Promise<void> {
+    return this.afAuth.sendPasswordResetEmail(email);
   }
 }

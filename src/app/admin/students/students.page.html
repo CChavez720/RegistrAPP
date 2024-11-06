@@ -7,7 +7,7 @@
     </ion-buttons>
     <ion-title>Gestión de Estudiantes</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="addUser()">Agregar</ion-button>
+      <ion-button (click)="addStudent()">Agregar</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -15,17 +15,17 @@
 <ion-content>
   <ion-grid>
     <ion-row>
-      <ion-col size="12" size-md="6" size-lg="4" *ngFor="let user of students">
+      <ion-col size="12" size-md="6" size-lg="4" *ngFor="let student of students">
         <ion-card>
           <ion-card-header>
-            <ion-card-title>{{ user.name }} {{ user.last_name }}</ion-card-title>
+            <ion-card-title>{{ student.name }} {{ student.last_name }}</ion-card-title>
           </ion-card-header>
           <ion-card-content>
-            <p>{{ user.email }}</p>
-            <ion-button expand="full" color="secondary" (click)="editUser(user)">
+            <p>{{ student.email }}</p>
+            <ion-button expand="full" color="secondary" (click)="editStudent(student)">
               Editar
             </ion-button>
-            <ion-button expand="full" color="danger" (click)="deleteUser(user)">
+            <ion-button expand="full" color="danger" (click)="deleteStudent(student)">
               Eliminar
             </ion-button>
           </ion-card-content>

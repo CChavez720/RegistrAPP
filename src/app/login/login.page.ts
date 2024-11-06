@@ -46,5 +46,9 @@ export class LoginPage implements OnInit {
       }
     }
   }
+
+  goToResetPassword() {
+    this.router.navigate(['/reset-password']); // Redirige a la página de recuperación de contraseña
+  }
   
 }

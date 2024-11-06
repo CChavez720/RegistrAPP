@@ -3,12 +3,13 @@ import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { StudentService } from '../../services/student.service';
 
-interface User {
+interface Student {
+  id?: string;
   name: string;
   last_name: string;
   email: string;
   password: string;
-  role: 'alumno' | 'profesor';
+  role: 'alumno';
   assignedCourses: string[];
 }
 
@@ -18,7 +19,7 @@ interface User {
   styleUrls: ['./students.page.scss'],
 })
 export class StudentsPage implements OnInit {
-  students: User[] = [];
+  students: Student[] = [];
 
   constructor(
     private studentService: StudentService,
@@ -31,22 +32,18 @@ export class StudentsPage implements OnInit {
   }
 
   loadStudents() {
-    this.studentService.getUsersByRole('alumno').subscribe(students => {
+    this.studentService.getStudents().subscribe(students => {
       this.students = students;
     });
   }
 
-  goBackToAdmin() {
-    this.router.navigate(['/admin']);
-  }
-
-  async addUser() {
+  async addStudent() {
     const alert = await this.alertController.create({
       header: 'Agregar Estudiante',
       inputs: [
         { name: 'name', type: 'text', placeholder: 'Nombre del Estudiante' },
         { name: 'last_name', type: 'text', placeholder: 'Apellido del Estudiante' },
-        { name: 'email', type: 'email', placeholder: 'Correo (nombre@duocuc.cl)' },
+        { name: 'email', type: 'email', placeholder: 'Correo (nombre@alumno.duoc.cl)' },
         { name: 'password', type: 'password', placeholder: 'Contraseña' },
         { name: 'assignedCourses', type: 'text', placeholder: 'Cursos asignados (IDs separados por comas)' }
       ],
@@ -55,7 +52,7 @@ export class StudentsPage implements OnInit {
         {
           text: 'Agregar',
           handler: data => {
-            const newStudent: User = {
+            const newStudent: Student = {
               name: data.name,
               last_name: data.last_name,
               email: data.email,
@@ -63,7 +60,7 @@ export class StudentsPage implements OnInit {
               role: 'alumno',
               assignedCourses: data.assignedCourses.split(',').map(id => id.trim())
             };
-            this.studentService.createUser(newStudent).then(() => this.loadStudents());
+            this.studentService.createStudent(newStudent).then(() => this.loadStudents());
           }
         }
       ]
@@ -71,13 +68,13 @@ export class StudentsPage implements OnInit {
     await alert.present();
   }
 
-  async editUser(student: User) {
+  async editStudent(student: Student) {
     const alert = await this.alertController.create({
       header: 'Editar Estudiante',
       inputs: [
         { name: 'name', type: 'text', value: student.name, placeholder: 'Nombre del Estudiante' },
         { name: 'last_name', type: 'text', value: student.last_name, placeholder: 'Apellido del Estudiante' },
-        { name: 'email', type: 'email', value: student.email, placeholder: 'Correo (nombre@duocuc.cl)' },
+        { name: 'email', type: 'email', value: student.email, placeholder: 'Correo (nombre@alumno.duoc.cl)' },
         { name: 'assignedCourses', type: 'text', value: student.assignedCourses?.join(', '), placeholder: 'Cursos asignados (IDs separados por comas)' }
       ],
       buttons: [
@@ -85,7 +82,7 @@ export class StudentsPage implements OnInit {
         {
           text: 'Guardar',
           handler: data => {
-            this.studentService.updateUser(student.email, {
+            this.studentService.updateStudent(student.id!, {
               name: data.name,
               last_name: data.last_name,
               email: data.email,
@@ -98,7 +95,7 @@ export class StudentsPage implements OnInit {
     await alert.present();
   }
 
-  async deleteUser(student: User) {
+  async deleteStudent(student: Student) {
     const alert = await this.alertController.create({
       header: 'Eliminar Estudiante',
       message: `¿Estás seguro de eliminar a ${student.name} ${student.last_name}?`,
@@ -107,11 +104,15 @@ export class StudentsPage implements OnInit {
         {
           text: 'Eliminar',
           handler: () => {
-            this.studentService.deleteUser(student.email).then(() => this.loadStudents());
+            this.studentService.deleteStudent(student.id!).then(() => this.loadStudents());
           }
         }
       ]
     });
     await alert.present();
+  }
+
+  goBackToAdmin() {
+    this.router.navigate(['/admin']);  // Redirige a la página de administración
   }
 }

@@ -29,7 +29,8 @@
     <button type="submit" class="btn-login" [disabled]="form.invalid">Ingresar</button>
   </form>
 
-  <a href="#" class="forgot-password">Recuperar mi contraseña</a>
+  <a class="forgot-password" (click)="goToResetPassword(); $event.preventDefault()">Recuperar mi contraseña</a>
+
 </div>
 
 <!-- Footer en la parte inferior (sin contenido, solo color) -->
