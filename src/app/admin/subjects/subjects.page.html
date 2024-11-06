@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Asignaturas</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="addSubject()">Agregar Asignatura</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let subject of subjects">
+      <ion-label>
+        <h2>{{ subject.name }}</h2>
+        <p>{{ subject.description }}</p>
+      </ion-label>
+      <ion-button color="secondary" (click)="assignUser(subject.id!, 'USER_ID', 'student')">Asignar Estudiante</ion-button>
+      <ion-button color="secondary" (click)="assignUser(subject.id!, 'USER_ID', 'teacher')">Asignar Profesor</ion-button>
+      <ion-button color="danger" (click)="deleteSubject(subject.id!)">Eliminar</ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

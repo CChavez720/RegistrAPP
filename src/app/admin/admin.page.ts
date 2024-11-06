@@ -50,4 +50,8 @@ export class AdminPage implements OnInit {
   navigateToTeachers() {
     this.router.navigateByUrl('/admin/teachers');
   }
+
+  navigateToSubjects() {
+    this.router.navigate(['/admin/subjects']);
+  }
 }
