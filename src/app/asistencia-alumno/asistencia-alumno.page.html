@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="volver()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Historial de Asistencia</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="materia-card" (click)="toggleAttendanceHistory()">
+    <ion-card-header>
+      <ion-card-title>PGY4121-005D</ion-card-title>
+      <ion-card-subtitle>Sección 123456</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <p><ion-icon name="location-outline"></ion-icon> Sala: SB-LC11 LAB. DE COMPUTACIÓN</p>
+      <p>SEGUNDO SEMESTRE 2024</p>
+    </ion-card-content>
+    <ion-button expand="full" color="secondary" (click)="toggleAttendanceHistory()">
+      {{ showAttendanceHistory ? 'Ocultar Historial de Asistencia' : 'Ver Historial de Asistencia' }}
+    </ion-button>
+  </ion-card>
+
+  <ion-list *ngIf="showAttendanceHistory" class="attendance-list">
+    <ion-list-header>
+      <ion-label>Historial de Asistencia</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let record of attendanceRecords">
+      <ion-label>
+        <h2>{{ record.fecha }}</h2>
+        <p>Materia: {{ record.materia }}</p>
+        <p>Estado: {{ record.estado }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

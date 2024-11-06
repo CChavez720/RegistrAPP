@@ -1,21 +1,19 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Bienvenido, {{ nombreUsuario }}</ion-title>
-    <ion-buttons slot="end"> <!-- Agregamos el slot 'end' para colocar el icono a la derecha -->
-      <ion-button (click)="logout()" fill="clear"> <!-- 'fill="clear"' hace que el botón no tenga fondo -->
-        <ion-icon name="log-out-outline"></ion-icon> <!-- Icono para cerrar sesión -->
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()" fill="clear">
+        <ion-icon name="log-out-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <!-- Logo centrado -->
   <div class="logo-container">
     <img src="assets/images/logoRegister.png" alt="Logo de la página" class="logo" />
   </div>
 
-  <!-- Botones centrados -->
   <ion-grid>
     <ion-row>
       <ion-col size="6">
@@ -25,7 +23,7 @@
         </div>
       </ion-col>
       <ion-col size="6">
-        <div class="card-button" (click)="escanearQR()">
+        <div class="card-button">
           <ion-icon name="qr-code-outline" class="icono"></ion-icon>
           <p>Escanear QR</p>
         </div>
@@ -34,7 +32,6 @@
   </ion-grid>
 </ion-content>
 
-<!-- Footer -->
 <ion-footer>
   <ion-toolbar>
     <ion-title>2024 RegistrApp - Todos los derechos reservados</ion-title>
