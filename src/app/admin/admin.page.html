@@ -3,6 +3,12 @@
     <ion-title class="custom-title">
       Administración
     </ion-title>
+    <!-- Icono de cerrar sesión al lado derecho -->
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -11,7 +17,7 @@
   <div class="welcome-container">
     <div class="welcome-text">
       <p>Bienvenido/a</p>
-      <p class="user-name">Nombre de Usuario</p>
+      <p class="user-name">{{ userName }}</p>
     </div>
   </div>
 
