@@ -11,12 +11,12 @@
   <ion-list>
     <ion-item *ngFor="let subject of subjects">
       <ion-label>
-        <h2>{{ subject.name }}</h2>
-        <p>{{ subject.description }}</p>
+        {{ subject.name }}
       </ion-label>
-      <ion-button color="secondary" (click)="assignUser(subject.id!, 'USER_ID', 'student')">Asignar Estudiante</ion-button>
-      <ion-button color="secondary" (click)="assignUser(subject.id!, 'USER_ID', 'teacher')">Asignar Profesor</ion-button>
-      <ion-button color="danger" (click)="deleteSubject(subject.id!)">Eliminar</ion-button>
+      <ion-button (click)="assignUsers(subject.id, 'student')">Asignar Estudiantes</ion-button>
+      <ion-button (click)="assignUsers(subject.id, 'teacher')">Asignar Profesores</ion-button>
+      <ion-button color="danger" (click)="deleteSubject(subject.id)">Eliminar</ion-button>
     </ion-item>
   </ion-list>
+  
 </ion-content>

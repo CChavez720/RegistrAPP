@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
+import { User } from 'src/models/user.model';
 
 interface Subject {
   id?: string;
   name: string;
-  description: string;
-  students: string[]; // Lista de IDs de estudiantes
-  teachers: string[]; // Lista de IDs de profesores
+  section: string;
+  room: string;
+  date: string;
+  description?: string;
+  students: string[];
+  teachers: string[];
 }
 
 @Injectable({
@@ -53,5 +57,54 @@ export class SubjectsService {
 
       transaction.update(subjectDoc.ref, subject);
     });
+  }
+
+  assignMultipleUsersToSubject(
+    subjectId: string,
+    userIds: string[],
+    role: 'student' | 'teacher'
+  ): Promise<void> {
+    if (!userIds || userIds.length === 0) {
+      console.error("Error: No se proporcionaron IDs de usuarios para asignar.");
+      return Promise.reject("No se seleccionaron usuarios.");
+    }
+  
+    const subjectDoc = this.subjectsCollection.doc(subjectId);
+    return this.firestore.firestore.runTransaction(async (transaction) => {
+      const subject = (await transaction.get(subjectDoc.ref)).data() as any;
+  
+      if (role === 'student') {
+        subject.students = [...new Set([...(subject.students || []), ...userIds])];
+      } else {
+        subject.teachers = [...new Set([...(subject.teachers || []), ...userIds])];
+      }
+  
+      transaction.update(subjectDoc.ref, subject);
+    }).catch(error => {
+      console.error("Error en la transacción de asignación:", error);
+      throw error;
+    });
+  }
+  
+   // Método para obtener estudiantes
+   getStudents(): Observable<any[]> {
+    return this.firestore.collection('users', ref => ref.where('role', '==', 'alumno')).snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as any;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
+  }
+
+  // Método para obtener profesores
+  getTeachers(): Observable<any[]> {
+    return this.firestore.collection('users', ref => ref.where('role', '==', 'profesor')).snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as any;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    );
   }
 }
