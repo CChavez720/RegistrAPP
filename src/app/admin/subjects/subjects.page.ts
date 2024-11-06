@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SubjectsService } from '../../services/subjects.service';
 import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 interface Subject {
   id?: string;
@@ -25,7 +26,8 @@ export class SubjectsPage implements OnInit {
 
   constructor(
     private subjectsService: SubjectsService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -138,5 +140,9 @@ export class SubjectsPage implements OnInit {
   // Eliminar una asignatura
   deleteSubject(subjectId: string) {
     this.subjectsService.deleteSubject(subjectId);
+  }
+
+  goBackToAdmin() {
+    this.router.navigate(['/admin']);  // Redirige a la página de administración
   }
 }

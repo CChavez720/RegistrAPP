@@ -1,22 +1,44 @@
 <ion-header>
   <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="goBackToAdmin()">
+        <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>Asignaturas</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="addSubject()">Agregar Asignatura</ion-button>
+      <ion-button (click)="addSubject()">Agregar</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let subject of subjects">
-      <ion-label>
-        {{ subject.name }}
-      </ion-label>
-      <ion-button (click)="assignUsers(subject.id, 'student')">Asignar Estudiantes</ion-button>
-      <ion-button (click)="assignUsers(subject.id, 'teacher')">Asignar Profesores</ion-button>
-      <ion-button color="danger" (click)="deleteSubject(subject.id)">Eliminar</ion-button>
-    </ion-item>
-  </ion-list>
-  
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="6" size-lg="4" *ngFor="let subject of subjects">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{ subject.name }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p><strong>Sección:</strong> {{ subject.section }}</p>
+            <p><strong>Sala:</strong> {{ subject.room }}</p>
+            <p><strong>Fecha:</strong> {{ subject.date | date: 'shortDate' }}</p>
+            <p><strong>Descripción:</strong> {{ subject.description || 'No disponible' }}</p>
+            
+            <!-- Botones para asignar estudiantes y profesores -->
+            <ion-button expand="full" color="secondary" (click)="assignUsers(subject.id, 'student')">
+              Asignar Estudiantes
+            </ion-button>
+            <ion-button expand="full" color="primary" (click)="assignUsers(subject.id, 'teacher')">
+              Asignar Profesores
+            </ion-button>
+            <ion-button expand="full" color="danger" (click)="deleteSubject(subject.id)">
+              Eliminar
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
