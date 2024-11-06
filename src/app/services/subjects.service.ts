@@ -1,7 +1,15 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable, map } from 'rxjs';
-import { User } from 'src/models/user.model';
+
+interface User {
+  id: string;
+  email: string;
+  name: string;
+  last_name: string;
+  role: 'alumno' | 'profesor';
+  assignedCourses: string[];  // Propiedad que contiene las asignaturas
+}
 
 interface Subject {
   id?: string;
@@ -46,19 +54,32 @@ export class SubjectsService {
   // Asignar estudiante o profesor a una asignatura
   assignToSubject(subjectId: string, userId: string, role: 'student' | 'teacher'): Promise<void> {
     const subjectDoc = this.subjectsCollection.doc(subjectId);
+    const userDoc = this.firestore.collection('users').doc(userId);
+
     return this.firestore.firestore.runTransaction(async (transaction) => {
       const subject = (await transaction.get(subjectDoc.ref)).data() as Subject;
+      const user = (await transaction.get(userDoc.ref)).data() as User;  // Se asegura de que 'user' tenga el tipo 'User'
 
+      // Agregar al estudiante o profesor en la asignatura
       if (role === 'student') {
         subject.students = [...(subject.students || []), userId];
       } else {
         subject.teachers = [...(subject.teachers || []), userId];
       }
 
+      // Agregar la asignatura al campo assignedCourses del usuario
+      const assignedCourses = user?.assignedCourses || [];
+      if (!assignedCourses.includes(subjectId)) {
+        assignedCourses.push(subjectId);
+      }
+
+      // Actualizar los documentos
       transaction.update(subjectDoc.ref, subject);
+      transaction.update(userDoc.ref, { assignedCourses });
     });
   }
 
+  // Asignar múltiples estudiantes o profesores a una asignatura
   assignMultipleUsersToSubject(
     subjectId: string,
     userIds: string[],
@@ -68,26 +89,39 @@ export class SubjectsService {
       console.error("Error: No se proporcionaron IDs de usuarios para asignar.");
       return Promise.reject("No se seleccionaron usuarios.");
     }
-  
+
     const subjectDoc = this.subjectsCollection.doc(subjectId);
     return this.firestore.firestore.runTransaction(async (transaction) => {
       const subject = (await transaction.get(subjectDoc.ref)).data() as any;
-  
+
       if (role === 'student') {
         subject.students = [...new Set([...(subject.students || []), ...userIds])];
       } else {
         subject.teachers = [...new Set([...(subject.teachers || []), ...userIds])];
       }
-  
+
+      // Actualizar los usuarios seleccionados en 'assignedCourses'
+      const userDocs = userIds.map(userId => this.firestore.collection('users').doc(userId));
+      const users = await Promise.all(userDocs.map(doc => transaction.get(doc.ref)));
+      
+      users.forEach(userSnapshot => {
+        const user = userSnapshot.data() as User;  // Usamos el tipo 'User' aquí
+        const assignedCourses = user?.assignedCourses || [];
+        if (!assignedCourses.includes(subjectId)) {
+          assignedCourses.push(subjectId);
+        }
+        transaction.update(userSnapshot.ref, { assignedCourses });
+      });
+
       transaction.update(subjectDoc.ref, subject);
     }).catch(error => {
       console.error("Error en la transacción de asignación:", error);
       throw error;
     });
   }
-  
-   // Método para obtener estudiantes
-   getStudents(): Observable<any[]> {
+
+  // Obtener estudiantes
+  getStudents(): Observable<any[]> {
     return this.firestore.collection('users', ref => ref.where('role', '==', 'alumno')).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as any;
@@ -97,7 +131,7 @@ export class SubjectsService {
     );
   }
 
-  // Método para obtener profesores
+  // Obtener profesores
   getTeachers(): Observable<any[]> {
     return this.firestore.collection('users', ref => ref.where('role', '==', 'profesor')).snapshotChanges().pipe(
       map(actions => actions.map(a => {

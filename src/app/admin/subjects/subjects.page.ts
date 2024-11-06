@@ -20,8 +20,8 @@ interface Subject {
 })
 export class SubjectsPage implements OnInit {
   subjects: Subject[] = [];  // Lista de asignaturas
-  students: any[] = [];  // Lista de estudiantes (sin necesidad de una interfaz extra)
-  teachers: any[] = [];  // Lista de profesores (sin necesidad de una interfaz extra)
+  students: any[] = [];  // Lista de estudiantes
+  teachers: any[] = [];  // Lista de profesores
 
   constructor(
     private subjectsService: SubjectsService,
@@ -89,10 +89,9 @@ export class SubjectsPage implements OnInit {
     await alert.present();
   }
 
-  // Asignar estudiantes o profesores a una asignatura
   async assignUsers(subjectId: string, role: 'student' | 'teacher') {
     const users = role === 'student' ? this.students : this.teachers;
-
+  
     // Verifica si hay usuarios disponibles
     if (users.length === 0) {
       const alert = await this.alertController.create({
@@ -103,7 +102,7 @@ export class SubjectsPage implements OnInit {
       await alert.present();
       return;
     }
-
+  
     const alert = await this.alertController.create({
       header: `Asignar ${role === 'student' ? 'Estudiantes' : 'Profesores'}`,
       inputs: users.map(user => ({
@@ -118,12 +117,12 @@ export class SubjectsPage implements OnInit {
           text: 'Asignar',
           handler: (selectedUserIds: string[]) => {
             if (selectedUserIds && selectedUserIds.length > 0) {
-              this.subjectsService.assignMultipleUsersToSubject(
-                subjectId,
-                selectedUserIds,
-                role
-              ).catch(error => {
-                console.error("Error al asignar usuarios:", error);
+              // Asignar la asignatura a los estudiantes o profesores seleccionados
+              selectedUserIds.forEach(userId => {
+                this.subjectsService.assignToSubject(subjectId, userId, role)
+                  .catch(error => {
+                    console.error("Error al asignar usuario:", error);
+                  });
               });
             } else {
               console.log("No se seleccionaron usuarios para asignar.");
@@ -132,10 +131,9 @@ export class SubjectsPage implements OnInit {
         }
       ]
     });
-
+  
     await alert.present();
   }
-
 
   // Eliminar una asignatura
   deleteSubject(subjectId: string) {
