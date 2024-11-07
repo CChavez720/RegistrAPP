@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -8,10 +8,16 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage {
-  userImage: string = 'ruta/a/la/imagen'; // Ruta de la imagen del usuario
-  userName: string = 'Nombre de Usuario'; // Nombre del usuario
+  userName: string = 'Tania Prado'; // Nombre del usuario
 
-  constructor(private afAuth: AngularFireAuth, private router: Router) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {}
+
+  logout() {
+    this.authService.logout(); // Llamar al logout del servicio
+  }
 
   navigateToMaterias() {
     this.router.navigate(['/materias']);
@@ -35,14 +41,5 @@ export class HomePage {
 
   navigateToReporte() {
     this.router.navigate(['/reporte']);
-  }
-
-  logout() {
-    // Lógica para cerrar sesión
-    // Por ejemplo, si usas Firebase:
-    this.afAuth.signOut().then(() => {
-      // Redirigir a la página de login después de cerrar sesión
-      this.router.navigate(['/login']);
-    });
   }
 }

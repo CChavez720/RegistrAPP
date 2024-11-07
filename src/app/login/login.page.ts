@@ -3,8 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 
-//implEMENTAR QUE NO GUARDE EMAIL Y CONTRASEÑA
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -12,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
   form: FormGroup;
+  showPassword: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -20,35 +19,50 @@ export class LoginPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Define el formulario reactivo y agrega validaciones
+    // Definir el formulario reactivo y validaciones
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
+
+    // Limpiar el formulario al cargar la página (en caso de persistencia de datos)
+    this.form.reset();
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 
   async submit() {
     if (this.form.valid) {
+      const { email, password } = this.form.value;
+
       try {
-        const { email, password } = this.form.value;
         const userCredential = await this.authService.login(email, password);
-  
+
+        // Dependiendo del rol del usuario, redirigir a diferentes páginas
         if (userCredential.role === 'profesor') {
-          this.router.navigate(['/home']); // Redirige a la página de inicio para profesores
-        }else if (userCredential.role === 'alumno') {
-          this.router.navigate(['/estudiante']); // Redirige a la vista de estudiantes
-        }else if (userCredential.role === 'administrador') {
-          this.router.navigate(['/admin']); // Redirige a la vista de admin
+          this.router.navigate(['/home']);
+        } else if (userCredential.role === 'alumno') {
+          this.router.navigate(['/estudiante']);
+        } else if (userCredential.role === 'administrador') {
+          this.router.navigate(['/admin']);
         }
       } catch (error) {
         console.error('Error al iniciar sesión:', error);
-        // Aquí puedes mostrar un mensaje de error al usuario
       }
     }
   }
 
   goToResetPassword() {
-    this.router.navigate(['/reset-password']); // Redirige a la página de recuperación de contraseña
+    this.router.navigate(['/reset-password']);
   }
   
+  logout() {
+    this.form.reset();  // Limpia los campos del formulario
+    // Resetea el formulario de login
+    localStorage.removeItem('userCredentials');  // Asegúrate de eliminar las credenciales
+    sessionStorage.removeItem('userCredentials');  // También elimina de sessionStorage si usas
+    this.authService.logout();  // Llama al logout del servicio
+  }
 }

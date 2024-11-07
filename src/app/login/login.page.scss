@@ -76,3 +76,17 @@
     color: #1e90ff;
     text-decoration: none;
 }
+
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+.password-wrapper ion-icon {
+    position: absolute;
+    right: 10px; /* Ajusta según tu preferencia */
+    cursor: pointer;
+    color: #888; /* Cambia el color del icono */
+}
+  

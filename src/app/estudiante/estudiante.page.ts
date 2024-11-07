@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-estudiante',
@@ -7,9 +8,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./estudiante.page.scss'],
 })
 export class EstudiantePage implements OnInit {
-  nombreUsuario: string = 'Camilo C.';
+  nombreUsuario: string = 'Camilo Chavez';
 
-  constructor(private router: Router) {}
+  constructor(private afAuth: AngularFireAuth, private router: Router) {}
 
   ngOnInit() {}
 
@@ -19,6 +20,10 @@ export class EstudiantePage implements OnInit {
   }
 
   logout() {
+    this.afAuth.signOut().then(() => {
+      // Redirigir a la página de login después de cerrar sesión
+      this.router.navigate(['/login']);
+    });
     console.log('Cerrando sesión...');
   }
 }

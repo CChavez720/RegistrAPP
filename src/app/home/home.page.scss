@@ -123,3 +123,10 @@ ion-content {
 .white-icon {
   color: white; /* Asegúrate de que los iconos sean blancos */
 }
+
+.user-image {
+  width: 100px; /* Ajusta el tamaño deseado */
+  height: 100px; /* Asegúrate de mantener las proporciones o ajusta como necesites */
+  border-radius: 50%; /* Esto redondeará la imagen (opcional) */
+  object-fit: cover; /* Ajusta la imagen para que llene el espacio sin deformarse */
+}

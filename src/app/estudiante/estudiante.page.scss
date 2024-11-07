@@ -9,7 +9,7 @@ ion-toolbar {
 ion-title {
     color: #ffffff;
     text-align: center;
-    font-size: 22px
+    font-size: 20px
 }
 
 ion-content {
@@ -111,4 +111,7 @@ ion-footer ion-title {
     cursor: pointer;
     border-radius: 4px;
 }
-  
+
+.white-icon {
+    color: white; /* Asegúrate de que los iconos sean blancos */
+}
