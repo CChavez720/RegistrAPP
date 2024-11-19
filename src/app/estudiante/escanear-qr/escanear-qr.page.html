@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Escaneo QR</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button expand="full" (click)="iniciarEscaneo()">Iniciar escaneo</ion-button>
+
+  <ion-card *ngIf="resultado">
+    <ion-card-header>
+      <ion-card-title>Resultado del QR</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{ resultado }}
+    </ion-card-content>
+  </ion-card>
+</ion-content>

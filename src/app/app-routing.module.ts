@@ -19,7 +19,7 @@ const routes: Routes = [
   },
   {
     path: 'splash-register',
-    loadChildren: () => import('./splash-register/splash-register.module').then(m => m.SplashRegisterPageModule)
+    loadChildren: () => import('./components/splash-register/splash-register.module').then(m => m.SplashRegisterPageModule)
   },
   {
     path: 'estudiante',
@@ -42,7 +42,8 @@ const routes: Routes = [
   {
     path: 'reset-password',
     loadChildren: () => import('./reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
-  },  {
+  },
+  {
     path: 'asistencia-alumno',
     loadChildren: () => import('./asistencia-alumno/asistencia-alumno.module').then( m => m.AsistenciaAlumnoPageModule)
   }

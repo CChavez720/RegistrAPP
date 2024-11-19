@@ -19,6 +19,10 @@ export class EstudiantePage implements OnInit {
     this.router.navigate(['/asistencia-alumno']);
   }
 
+  verQr() {
+    this.router.navigate(['/estudiante/escanear-qr']);
+  }
+
   logout() {
     this.afAuth.signOut().then(() => {
       // Redirigir a la página de login después de cerrar sesión

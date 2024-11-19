@@ -6,7 +6,12 @@ const routes: Routes = [
   {
     path: '',
     component: EstudiantePage
+  },
+  {
+    path: 'escanear-qr',
+    loadChildren: () => import('./escanear-qr/escanear-qr.module').then( m => m.EscanearQrPageModule)
   }
+
 ];
 
 @NgModule({
