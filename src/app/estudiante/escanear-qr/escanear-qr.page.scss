@@ -1,11 +1,45 @@
 #scanner-container {
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: relative;
     width: 100%;
     height: 100%;
-    z-index: -1; /* Asegura que esté detrás de otros elementos */
-  }  
+    background-color: rgba(0, 0, 0, 0.8); /* Oscurece el fondo */
+    z-index: 10;
+}
+  
+/* Marco alrededor del área de escaneo */
+#marco-qr {
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    width: 80%;
+    height: 300px;
+    border: 2px solid #00ff00;
+    border-radius: 8px;
+    box-shadow: 0 0 15px #00ff00;
+    z-index: 10;
+    pointer-events: none; /* Evita interferencias con la cámara */
+}
+  
+/* Línea animada para indicar el escaneo */
+#linea-escaner {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #00ff00;
+    animation: escaneo 2s infinite;
+}
+  
+/* Animación para la línea */
+@keyframes escaneo {
+0% {
+    top: 0;
+}
+100% {
+    top: 100%;
+}
+}
+  
+  
 
 ion-content {
     background: transparent !important; /* Fondo transparente */

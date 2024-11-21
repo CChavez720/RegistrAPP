@@ -1,7 +1,13 @@
 <ion-content>
-  <div id="scanner-container" *ngIf="escaneando"></div>
+  <!-- Contenedor para mostrar un marco alrededor del escáner -->
+  <div id="marco-qr">
+    <div id="linea-escaner"></div>
+  </div>
+
+  <!-- Botón para iniciar el escaneo -->
   <ion-button expand="full" (click)="iniciarEscaneo()">Iniciar escaneo</ion-button>
 
+  <!-- Mostrar resultado del QR -->
   <ion-card *ngIf="resultado">
     <ion-card-header>
       <ion-card-title>Resultado del QR</ion-card-title>
@@ -11,3 +17,4 @@
     </ion-card-content>
   </ion-card>
 </ion-content>
+
