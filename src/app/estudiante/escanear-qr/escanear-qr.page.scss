@@ -1,0 +1,17 @@
+#scanner-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Asegura que esté detrás de otros elementos */
+  }  
+
+ion-content {
+    background: transparent !important; /* Fondo transparente */
+}
+body {
+    background: transparent !important; /* Asegúrate de que todo el fondo sea transparente */
+}
+  
+  

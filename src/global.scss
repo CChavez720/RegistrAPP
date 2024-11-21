@@ -35,3 +35,21 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+
+ion-content {
+  --background: transparent; /* Asegura que el fondo sea transparente */
+}
+
+body {
+  background-color: transparent !important; /* Asegura transparencia en el fondo */
+}
+
+html, body, #scanner-container {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+

@@ -9,39 +9,49 @@ import { Platform } from '@ionic/angular';
 })
 export class EscanearQrPage {
   resultado: string | null = null;
+  escaneando: boolean = false; // Variable para controlar el estado del escaneo
+
 
   constructor(private platform: Platform) {}
 
   async iniciarEscaneo() {
-    // Verificar si la plataforma soporta el plugin
     if (!this.platform.is('capacitor')) {
       alert('Escaneo QR solo está disponible en dispositivos reales.');
       return;
     }
-
+  
     try {
-      // Pedir permiso para usar la cámara
+      // Verifica y solicita permisos
       const permiso = await BarcodeScanner.checkPermission({ force: true });
-
+  
       if (permiso.granted) {
-        // Iniciar el escaneo
-        await BarcodeScanner.hideBackground(); // Ocultar el fondo de la app
+        // Hacer que el fondo sea transparente y activar la cámara
+        await BarcodeScanner.hideBackground();
+        document.body.style.backgroundColor = 'transparent';
+  
         const resultado = await BarcodeScanner.startScan();
-
-        // Detener el escaneo si se escaneó correctamente
+  
         if (resultado.hasContent) {
-          this.resultado = resultado.content; // Guardar el contenido escaneado
+          this.resultado = resultado.content;
         }
+      } else if (permiso.denied) {
+        alert('Los permisos de la cámara fueron denegados permanentemente. Actívalos manualmente en la configuración.');
+        // Redirigir al usuario a los ajustes de la app
+        BarcodeScanner.openAppSettings();
       } else {
         alert('Permiso denegado para usar la cámara.');
       }
     } catch (error) {
       console.error('Error al escanear:', error);
     } finally {
-      // Mostrar el fondo de la app después del escaneo
       BarcodeScanner.showBackground();
+      document.body.style.backgroundColor = '';
     }
   }
+  
+  
+  
+  
 
   ionViewWillLeave() {
     // Detener el escaneo al salir de la página
