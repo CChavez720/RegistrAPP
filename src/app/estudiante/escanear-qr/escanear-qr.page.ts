@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
+import { Geolocation } from '@capacitor/geolocation'; // Importar geolocalización
 import { Platform } from '@ionic/angular';
 
 @Component({
@@ -10,6 +11,11 @@ import { Platform } from '@ionic/angular';
 export class EscanearQrPage {
   resultado: string | null = null;
 
+  // Coordenadas del instituto (ejemplo)
+  private institutoLat = -33.598819; // Latitud del instituto
+  private institutoLng = -70.705345; // Longitud del instituto
+  private radioPermitido = 300; // Radio permitido en metros
+
   constructor(private platform: Platform) {}
 
   async iniciarEscaneo() {
@@ -19,6 +25,12 @@ export class EscanearQrPage {
     }
 
     try {
+      const ubicacionValida = await this.validarUbicacion();
+      if (!ubicacionValida) {
+        this.mostrarAlerta('No estás en el lugar permitido para escanear el QR.');
+        return;
+      }
+
       const permiso = await this.verificarPermisos();
       if (permiso) {
         this.prepararEscaneo();
@@ -33,6 +45,42 @@ export class EscanearQrPage {
     } finally {
       this.terminarEscaneo();
     }
+  }
+
+  // Validar la ubicación actual
+  private async validarUbicacion(): Promise<boolean> {
+    try {
+      const coordinates = await Geolocation.getCurrentPosition();
+      const distancia = this.calcularDistancia(
+        coordinates.coords.latitude,
+        coordinates.coords.longitude,
+        this.institutoLat,
+        this.institutoLng
+      );
+
+      return distancia <= this.radioPermitido;
+    } catch (error) {
+      console.error('Error al obtener la ubicación:', error);
+      this.mostrarAlerta('Error al obtener tu ubicación. Por favor, activa la geolocalización.');
+      return false;
+    }
+  }
+
+  // Calcular la distancia entre dos puntos geográficos
+  private calcularDistancia(lat1: number, lon1: number, lat2: number, lon2: number): number {
+    const R = 6371e3; // Radio de la Tierra en metros
+    const rad = Math.PI / 180;
+    const φ1 = lat1 * rad;
+    const φ2 = lat2 * rad;
+    const Δφ = (lat2 - lat1) * rad;
+    const Δλ = (lon2 - lon1) * rad;
+
+    const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+              Math.cos(φ1) * Math.cos(φ2) *
+              Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c; // Distancia en metros
   }
 
   private async verificarPermisos(): Promise<boolean> {
