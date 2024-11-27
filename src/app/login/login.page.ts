@@ -36,16 +36,18 @@ export class LoginPage implements OnInit {
   async submit() {
     if (this.form.valid) {
       const { email, password } = this.form.value;
-
+  
       try {
         const userCredential = await this.authService.login(email, password);
-
-        // Dependiendo del rol del usuario, redirigir a diferentes páginas
-        if (userCredential.role === 'profesor') {
+  
+        // Extraer el rol desde userCredential
+        const userRole = userCredential.userData.role;
+  
+        if (userRole === 'profesor') {
           this.router.navigate(['/home']);
-        } else if (userCredential.role === 'alumno') {
+        } else if (userRole === 'alumno') {
           this.router.navigate(['/estudiante']);
-        } else if (userCredential.role === 'administrador') {
+        } else if (userRole === 'administrador') {
           this.router.navigate(['/admin']);
         }
       } catch (error) {
@@ -53,6 +55,7 @@ export class LoginPage implements OnInit {
       }
     }
   }
+  
 
   goToResetPassword() {
     this.router.navigate(['/reset-password']);

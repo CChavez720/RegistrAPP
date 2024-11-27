@@ -18,23 +18,33 @@ export class AuthService {
   // Método para iniciar sesión
   async login(email: string, password: string) {
     try {
-      const usersRef = this.firestore.collection('users', ref => ref.where('email', '==', email));
-      const snapshot = await usersRef.get().toPromise();
+      const userCredential = await this.afAuth.signInWithEmailAndPassword(email, password);
+      const currentUser = userCredential.user;
   
-      if (!snapshot.empty) {
-        const userDoc = snapshot.docs[0];
-        const userData = userDoc.data();
-  
-        // Asegurarse de que userData es un objeto antes de usar el operador de propagación
-        if (typeof userData === 'object' && userData !== null) {
-          this.currentUser = { uid: userDoc.id, ...userData }; // Almacena datos del usuario
-          return this.currentUser; // Devuelve los datos del usuario si la autenticación es exitosa
-        } else {
-          throw new Error('Datos de usuario inválidos');
-        }
-      } else {
-        throw new Error('Usuario no encontrado');
+      if (!currentUser) {
+        console.error('Error al autenticar: Usuario no válido.');
+        throw new Error('Usuario no válido.');
       }
+  
+      console.log('Usuario autenticado con UID:', currentUser.uid);
+  
+      // Obtener el documento del usuario
+      const userDocRef = this.firestore.collection('users').doc(currentUser.uid);
+      const userDocSnapshot = await userDocRef.get().toPromise();
+  
+      if (!userDocSnapshot.exists) {
+        console.error('Documento del usuario no encontrado en Firestore.');
+        throw new Error('Documento del usuario no encontrado en Firestore.');
+      }
+  
+      const userData = userDocSnapshot.data();
+      console.log('Datos obtenidos de Firestore:', userData);
+  
+      // Almacenar el usuario actual
+      this.currentUser = { uid: currentUser.uid, userData };
+      console.log('Inicio de sesión exitoso:', this.currentUser);
+  
+      return this.currentUser;
     } catch (error) {
       console.error('Error al iniciar sesión:', error);
       throw error;
@@ -47,23 +57,24 @@ export class AuthService {
     return this.currentUser;
   }
 
+  // Enviar correo de recuperación de contraseña
   async sendPasswordResetEmail(email: string): Promise<void> {
     try {
       await this.afAuth.sendPasswordResetEmail(email);
     } catch (error) {
       console.error('Error al enviar el correo de recuperación de contraseña:', error);
-      throw error; // Rethrow the error for handling in the component
+      throw error;
     }
   }
 
   // Cerrar sesión
   logout() {
-    // Elimina las credenciales almacenadas
+    // Limpiar credenciales
     localStorage.removeItem('userCredentials');
     sessionStorage.removeItem('userCredentials');
-    // Resetea el estado del usuario
     this.currentUser = null;
-    // Cierra la sesión de Firebase
+
+    // Cerrar sesión en Firebase y redirigir al login
     this.afAuth.signOut().then(() => {
       this.router.navigate(['/login']);
     }).catch((error) => {
