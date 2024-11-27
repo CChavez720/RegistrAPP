@@ -12,7 +12,7 @@ export class EscanearQrPage {
   resultado: string | null = null;
   private institutoLat = -33.599908;
   private institutoLng = -70.7001783;
-  private radioPermitido = 500; // en metros
+  private radioPermitido = 500;
   public ubicacionActual: string = '';  
   public distanciaCalculada: string = '';  
 
