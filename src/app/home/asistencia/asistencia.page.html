@@ -38,9 +38,15 @@
       <ion-button expand="block" class="qr-button" (click)="generateQRCode()">Generar QR</ion-button>
 
       <!-- Donde se mostrará el QR generado -->
-      <div class="qr-container-wrapper">
+      <div *ngIf="showQRCode" class="qr-container-wrapper">
         <canvas id="qrcode" class="qr-container"></canvas>
       </div>
+
+      <!-- Barra de progreso -->
+      <ion-progress-bar [value]="progress" color="primary"></ion-progress-bar>
+
     </ion-card-content>
   </ion-card>
 </ion-content>
+
+
