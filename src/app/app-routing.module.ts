@@ -33,11 +33,11 @@ const routes: Routes = [
   },
   {
     path: 'materias',
-    loadChildren: () => import('./materias/materias.module').then( m => m.MateriasPageModule)
+    loadChildren: () => import('./home/materias/materias.module').then( m => m.MateriasPageModule)
   },
   {
     path: 'asistencia',
-    loadChildren: () => import('./asistencia/asistencia.module').then( m => m.AsistenciaPageModule)
+    loadChildren: () => import('./home/asistencia/asistencia.module').then( m => m.AsistenciaPageModule)
   },
   {
     path: 'reset-password',

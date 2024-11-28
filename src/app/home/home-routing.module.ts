@@ -10,7 +10,7 @@ const routes: Routes = [
     children: [
       {
         path: 'asistencia',
-        loadChildren: () => import('../asistencia/asistencia.module').then(m => m.AsistenciaPageModule),
+        loadChildren: () => import('./asistencia/asistencia.module').then(m => m.AsistenciaPageModule),
         canActivate: [AuthGuard]
       }
     ]

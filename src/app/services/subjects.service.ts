@@ -141,4 +141,9 @@ export class SubjectsService {
       }))
     );
   }
+
+  getSubjectsByTeacher(teacherId: string): Observable<Subject[]> {
+    return this.firestore.collection<Subject>('subjects', ref => ref.where('teachers', 'array-contains', teacherId))
+      .valueChanges({ idField: 'id' });
+  }
 }
