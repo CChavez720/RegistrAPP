@@ -23,7 +23,7 @@ export class AsistenciaPage implements AfterViewChecked {
   }
 
   generateQRCode() {
-    const qrCodeData = 'PGY4121-005D - Sección 123456'; // Los datos que se incluirán en el código QR
+    const qrCodeData = 'PGY4121 - Sección 005D'; // Los datos que se incluirán en el código QR
 
     // Aseguramos que el canvas está disponible antes de intentar generar el QR
     if (this.canvas) {

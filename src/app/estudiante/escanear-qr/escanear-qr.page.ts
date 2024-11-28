@@ -10,8 +10,8 @@ import { Platform } from '@ionic/angular';
 })
 export class EscanearQrPage {
   resultado: string | null = null;
-  private institutoLat = -33.5990009;
-  private institutoLng = -70.7080072;
+  private institutoLat = -33.5988973;
+  private institutoLng = -70.7084294;
   private radioPermitido = 500;
   public ubicacionActual: string = '';  
   public distanciaCalculada: string = '';  
