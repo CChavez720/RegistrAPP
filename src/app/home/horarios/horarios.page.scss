@@ -1,12 +1,56 @@
-mwl-calendar-month-view {
-    --calendar-border-color: #ccc;
-    --calendar-background-color: #f9f9f9;
-  }
-  
-  .calendar-event {
-    background-color: #3880ff;
-    color: white;
-    border-radius: 5px;
-    padding: 5px;
-  }
-  
+ion-toolbar {
+  --background: #92ccf9;
+  width: 100%;
+  height: 80px;
+  --padding-top: 0px;
+  --padding-bottom: 0px;
+  display: flex;
+  align-items: center;
+}
+
+.calendar {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+}
+
+.calendar-days-of-week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-weight: bold;
+}
+
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.calendar-days div {
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.calendar-days div:hover {
+  background-color: #f0f0f0;
+}
+
+.selected {
+  background-color: #007bff;
+  color: white;
+  border-radius: 50%;
+}

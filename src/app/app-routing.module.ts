@@ -40,6 +40,10 @@ const routes: Routes = [
     loadChildren: () => import('./home/asistencia/asistencia.module').then( m => m.AsistenciaPageModule)
   },
   {
+    path: 'horarios',
+    loadChildren: () => import('./home/horarios/horarios.module').then( m => m.HorariosPageModule)
+  },
+  {
     path: 'reset-password',
     loadChildren: () => import('./reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
   },

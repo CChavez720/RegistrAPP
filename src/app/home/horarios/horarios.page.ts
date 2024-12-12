@@ -1,30 +1,53 @@
-import { Component } from '@angular/core';
-import { CalendarEvent } from 'angular-calendar';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-horarios',
   templateUrl: './horarios.page.html',
   styleUrls: ['./horarios.page.scss'],
 })
-export class HorariosPage {
-  viewDate: Date = new Date(); // Fecha actual
-  events: CalendarEvent[] = []; // Lista de eventos en el calendario
+export class HorariosPage implements OnInit {
+  currentDate: Date;
+  days: number[];
+  selectedDate: Date;
 
-  constructor() {}
+  constructor() {
+    this.currentDate = new Date();
+    this.selectedDate = new Date();
+    this.days = [];
+  }
 
-  // Manejar clics en días del calendario
-  dayClicked(day: { date: Date; events: CalendarEvent[] }): void {
-    const subject = prompt('Ingrese la asignatura para este día:');
-    if (subject) {
-      this.events.push({
-        start: day.date,
-        title: subject,
-      });
+  ngOnInit() {
+    this.generateCalendar();
+  }
+
+  generateCalendar() {
+    this.days = [];
+    const firstDayOfMonth = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), 1);
+    const lastDayOfMonth = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1, 0);
+    const startingDay = firstDayOfMonth.getDay();
+    const totalDays = lastDayOfMonth.getDate();
+
+    for (let i = 0; i < startingDay; i++) {
+      this.days.push(null); // Espacios vacíos antes del primer día
+    }
+    for (let i = 1; i <= totalDays; i++) {
+      this.days.push(i); // Días del mes
     }
   }
 
-  // Manejar clics en eventos
-  eventClicked(event: CalendarEvent): void {
-    alert(`Evento: ${event.title}`);
+  selectDate(day: number) {
+    if (day) {
+      this.selectedDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), day);
+    }
+  }
+
+  goToPreviousMonth() {
+    this.currentDate.setMonth(this.currentDate.getMonth() - 1);
+    this.generateCalendar();
+  }
+
+  goToNextMonth() {
+    this.currentDate.setMonth(this.currentDate.getMonth() + 1);
+    this.generateCalendar();
   }
 }

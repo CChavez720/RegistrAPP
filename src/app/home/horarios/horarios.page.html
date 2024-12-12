@@ -1,16 +1,32 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <!-- Botón de retroceso con ícono de flecha -->
+      <ion-back-button defaultHref="/home" text="" icon="arrow-back-outline" class="home-back-button"></ion-back-button>
+    </ion-buttons>
     <ion-title>Horarios</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div style="height: 600px;">
-    <mwl-calendar-month-view
-      [viewDate]="viewDate"
-      [events]="events"
-      (dayClicked)="dayClicked($event.day)"
-      (eventClicked)="eventClicked($event.event)">
-    </mwl-calendar-month-view>
+  <!-- Calendario -->
+  <div class="calendar">
+    <div class="calendar-header">
+      <button (click)="goToPreviousMonth()">&#8249;</button>
+      <span>{{ currentDate | date: 'MMMM yyyy' }}</span>
+      <button (click)="goToNextMonth()">&#8250;</button>
+    </div>
+
+    <div class="calendar-days-of-week">
+      <div *ngFor="let day of ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']">
+        {{ day }}
+      </div>
+    </div>
+
+    <div class="calendar-days">
+      <div *ngFor="let day of days" (click)="selectDate(day)" [class.selected]="selectedDate.getDate() === day">
+        {{ day }}
+      </div>
+    </div>
   </div>
 </ion-content>
