@@ -10,7 +10,11 @@ const routes: Routes = [
   {
     path: 'escanear-qr',
     loadChildren: () => import('./escanear-qr/escanear-qr.module').then( m => m.EscanearQrPageModule)
+  },  {
+    path: 'alumnos',
+    loadChildren: () => import('./alumnos/alumnos.module').then( m => m.AlumnosPageModule)
   }
+
 
 ];
 
