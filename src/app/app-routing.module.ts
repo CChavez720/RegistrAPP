@@ -44,6 +44,10 @@ const routes: Routes = [
     loadChildren: () => import('./home/horarios/horarios.module').then( m => m.HorariosPageModule)
   },
   {
+    path: 'reporte',
+    loadChildren: () => import('./home/reporte/reporte.module').then( m => m.ReportePageModule)
+  },
+  {
     path: 'reset-password',
     loadChildren: () => import('./reset-password/reset-password.module').then(m => m.ResetPasswordPageModule)
   },
@@ -55,7 +59,7 @@ const routes: Routes = [
     path: 'alumnos',
     loadChildren: () => import('./estudiante/alumnos/alumnos.module').then(m => m.AlumnosPageModule),
     canActivate: [AuthGuard] // Protege la ruta de alumnos si es necesario
-  }
+  },
 ];
 
 @NgModule({

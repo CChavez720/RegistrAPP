@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <!-- Botón de retroceso con ícono de flecha -->
+      <ion-back-button defaultHref="/home" text="" icon="arrow-back-outline" class="home-back-button"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="centered-title">Reporte de Asistencia</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Selección del Alumno -->
+  <ion-item>
+    <ion-label>Seleccionar Alumno</ion-label>
+    <ion-select [(ngModel)]="selectedAlumno" (ionChange)="onAlumnoSelected()">
+      <ion-select-option *ngFor="let alumno of alumnos" [value]="alumno">
+        {{ alumno.nombre }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <!-- Mostrar la Asistencia del Alumno -->
+  <div *ngIf="asistencia.length > 0">
+    <h3>Asistencia del Alumno</h3>
+    
+    <!-- Card para la Asistencia -->
+    <ion-card *ngFor="let item of asistencia">
+      <ion-card-header>
+        <ion-card-title>{{ item.fecha | date: 'dd/MM/yyyy' }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ item.estado }}</p>
+      </ion-card-content>
+    </ion-card>
+    
+  </div>
+
+  <!-- Mensaje cuando no hay asistencia -->
+  <div *ngIf="asistencia.length === 0 && selectedAlumno">
+    <ion-card>
+      <ion-card-content>
+        <p>No se ha encontrado asistencia para el alumno seleccionado.</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

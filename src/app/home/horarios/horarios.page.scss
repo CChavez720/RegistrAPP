@@ -8,6 +8,16 @@ ion-toolbar {
   align-items: center;
 }
 
+.centered-title {
+  text-align: center;
+  padding-right: 25%;
+  color: white; /* Color del texto del título */
+}
+
+.home-back-button {
+  color: white; /* Color del icono de flecha */
+}
+
 .calendar {
   width: 100%;
   max-width: 400px;
