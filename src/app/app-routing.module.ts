@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard'; // Importa el guard que has creado
@@ -40,6 +41,14 @@ const routes: Routes = [
     loadChildren: () => import('./home/asistencia/asistencia.module').then(m => m.AsistenciaPageModule)
   },
   {
+    path: 'horarios',
+    loadChildren: () => import('./home/horarios/horarios.module').then( m => m.HorariosPageModule)
+  },
+  {
+    path: 'reporte',
+    loadChildren: () => import('./home/reporte/reporte.module').then( m => m.ReportePageModule)
+  },
+  {
     path: 'reset-password',
     loadChildren: () => import('./reset-password/reset-password.module').then(m => m.ResetPasswordPageModule)
   },
@@ -51,12 +60,9 @@ const routes: Routes = [
     path: 'alumnos',
     loadChildren: () => import('./estudiante/alumnos/alumnos.module').then(m => m.AlumnosPageModule),
     canActivate: [AuthGuard] // Protege la ruta de alumnos si es necesario
-  },  {
-    path: 'grupos',
-    loadChildren: () => import('./grupos/grupos.module').then( m => m.GruposPageModule)
-  }
-
+  },
 ];
+
 
 @NgModule({
   imports: [
