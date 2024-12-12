@@ -37,6 +37,10 @@ const routes: Routes = [
     loadChildren: () => import('./home/materias/materias.module').then(m => m.MateriasPageModule)
   },
   {
+    path: 'grupos',
+    loadChildren: () => import('./home/grupos/grupos.module').then(m => m.GruposPageModule)
+  },
+  {
     path: 'asistencia',
     loadChildren: () => import('./home/asistencia/asistencia.module').then(m => m.AsistenciaPageModule)
   },
