@@ -12,8 +12,22 @@ const routes: Routes = [
         path: 'asistencia',
         loadChildren: () => import('./asistencia/asistencia.module').then(m => m.AsistenciaPageModule),
         canActivate: [AuthGuard]
+      },
+      {
+        path: 'horarios',
+        loadChildren: () => import('./horarios/horarios.module').then(m => m.HorariosPageModule)
+      },
+      {
+        path: '',
+        redirectTo: 'asistencia',
+        pathMatch: 'full'
       }
     ]
+  },
+  {
+    path: '',
+    redirectTo: '',
+    pathMatch: 'full'
   }
 ];
 
