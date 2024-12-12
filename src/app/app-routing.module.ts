@@ -33,22 +33,25 @@ const routes: Routes = [
   },
   {
     path: 'materias',
-    loadChildren: () => import('./home/materias/materias.module').then( m => m.MateriasPageModule)
+    loadChildren: () => import('./home/materias/materias.module').then(m => m.MateriasPageModule)
   },
   {
     path: 'asistencia',
-    loadChildren: () => import('./home/asistencia/asistencia.module').then( m => m.AsistenciaPageModule)
+    loadChildren: () => import('./home/asistencia/asistencia.module').then(m => m.AsistenciaPageModule)
   },
   {
     path: 'reset-password',
-    loadChildren: () => import('./reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
+    loadChildren: () => import('./reset-password/reset-password.module').then(m => m.ResetPasswordPageModule)
   },
   {
     path: 'asistencia-alumno',
-    loadChildren: () => import('./estudiante/asistencia-alumno/asistencia-alumno.module').then( m => m.AsistenciaAlumnoPageModule)
+    loadChildren: () => import('./estudiante/asistencia-alumno/asistencia-alumno.module').then(m => m.AsistenciaAlumnoPageModule)
+  },
+  {
+    path: 'alumnos',
+    loadChildren: () => import('./estudiante/alumnos/alumnos.module').then(m => m.AlumnosPageModule),
+    canActivate: [AuthGuard] // Protege la ruta de alumnos si es necesario
   }
-
-
 ];
 
 @NgModule({
@@ -58,5 +61,3 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-
-
