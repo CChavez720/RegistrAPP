@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Crear Grupos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Selección de la Clase -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Clases</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-radio-group [(ngModel)]="selectedClase" (ionChange)="obtenerEstudiantes(selectedClase)">
+        <ion-list>
+          <ion-item *ngFor="let clase of clases">
+            <ion-label>{{ clase.name }}</ion-label>
+            <ion-radio slot="start" [value]="clase.id"></ion-radio>
+          </ion-item>
+        </ion-list>
+      </ion-radio-group>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Lista de Estudiantes -->
+  <ion-card *ngIf="selectedClase && estudiantes.length > 0">
+    <ion-card-header>
+      <ion-card-title>Estudiantes</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let estudiante of estudiantes">
+          <ion-label>
+            <h2>{{ estudiante.name }}</h2>
+            <p>{{ estudiante.email }}</p>
+          </ion-label>
+          <ion-checkbox slot="end" [(ngModel)]="estudiante.selected"></ion-checkbox>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Botón para Crear Equipos -->
+  <ion-button expand="block" (click)="crearEquipos()">
+    Crear Equipos
+  </ion-button>
+
+  <!-- Lista de Equipos Creados -->
+  <ion-card *ngIf="equipos.length > 0">
+    <ion-card-header>
+      <ion-card-title>Grupos Creados</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let equipo of equipos">
+          <ion-label>
+            <h2>Grupo {{ equipo.id }}</h2>
+            <p>Miembros: {{ equipo.miembros.join(', ') }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

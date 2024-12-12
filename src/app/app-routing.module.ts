@@ -51,7 +51,11 @@ const routes: Routes = [
     path: 'alumnos',
     loadChildren: () => import('./estudiante/alumnos/alumnos.module').then(m => m.AlumnosPageModule),
     canActivate: [AuthGuard] // Protege la ruta de alumnos si es necesario
+  },  {
+    path: 'grupos',
+    loadChildren: () => import('./grupos/grupos.module').then( m => m.GruposPageModule)
   }
+
 ];
 
 @NgModule({
