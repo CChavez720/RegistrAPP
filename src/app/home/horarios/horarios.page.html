@@ -24,9 +24,23 @@
     </div>
 
     <div class="calendar-days">
-      <div *ngFor="let day of days" (click)="selectDate(day)" [class.selected]="selectedDate.getDate() === day">
+      <div *ngFor="let day of days" (click)="selectDate(day)" 
+           [class.selected]="selectedDate.getDate() === day" 
+           [class.class-day]="isClassDay(day)">
         {{ day }}
       </div>
     </div>
+  </div>
+
+  <!-- Mostrar texto debajo del calendario al hacer clic en una fecha -->
+  <div *ngIf="selectedDate">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Detalles del Día: {{ selectedDate | date: 'dd/MM/yyyy' }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ selectedDateText }}</p>
+      </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>

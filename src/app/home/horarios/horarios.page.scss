@@ -44,20 +44,31 @@ ion-toolbar {
 .calendar-days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 5px;
-  margin-top: 10px;
+  grid-gap: 5px;
 }
 
 .calendar-days div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 10px;
-  text-align: center;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  border-radius: 5px;
+}
+
+.calendar-days div.selected {
+  background-color: #007bff;
+  color: white;
+}
+
+.calendar-days div.class-day {
+  background-color: #a2d9f7; /* Celeste */
 }
 
 .calendar-days div:hover {
-  background-color: #f0f0f0;
+  background-color: #e6f2ff;
 }
+
 
 .selected {
   background-color: #007bff;
